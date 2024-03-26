@@ -1,6 +1,5 @@
 var express = require('express');
 
-var PORT;
 var Cloudant = require('@cloudant/cloudant');
 
 let PORT = process.env.PORT || 8000;
