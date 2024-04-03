@@ -89,48 +89,37 @@ app.post('/insert-document', function (req, res) {
 
 
 /////   insert bulk documents
-app.post('/insert-bulk/:database_name', function (req, res) {
-  var _id, name, address, phone, age;
-  //var database_name;
-  var database_name1 = req.params.database_name;
 
-  for (var i = 0; i < 3; i++) {
+app.post("/insert-bulk/:database_name", function (req, res) {
+  const database_name = req.params.database_name;
+  const students = [];
 
-    var student =
-    {
+  for (let i = 0; i < 3; i++) {
+    const student = {
       _id: req.body.docs[i].id,
       name: req.body.docs[i].name,
       address: req.body.docs[i].address,
       phone: req.body.docs[i].phone,
       age: req.body.docs[i].age,
-    }
-    //console.log(student);
-
-
+    };
 
     students.push(student);
-
-
   }
 
-  console.log(students);
   Cloudant({ url: url, username: username, password: password }, function (err, cloudant, pong) {
     if (err) {
-      return console.log('Failed to initialize Cloudant: ' + err.message);
+      return console.log("Failed to initialize Cloudant: " + err.message);
     }
-    console.log(pong); // {"couchdb":"Welcome","version": ..
 
-    cloudant.use(database_name1).bulk({ docs: students }, function (err) {
+    cloudant.use(database_name).bulk({ docs: students }, function (err) {
       if (err) {
         throw err;
       }
 
-      res.send('Inserted all documents');
+      res.send("Inserted all documents");
     });
   });
 });
-
-
 
 
 
