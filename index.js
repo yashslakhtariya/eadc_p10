@@ -1,13 +1,8 @@
 var express = require('express');
 
-var PORT;
 var Cloudant = require('@cloudant/cloudant');
 
-if(process.env.PORT){
-  var PORT = process.env.PORT;
-}else{
-  var PORT = 8000;
-}
+var PORT = process.env.PORT || 8000;
 
 var url = 'https://apikey-v2-2ljquxfv08tvwer4tzk7yqo17r4gst81mj2js2tkwvvi:1ea37fd951083872588cb276a59465ad@60379ad1-b8cb-4933-bb03-b1bfa6df8a7e-bluemix.cloudantnosqldb.appdomain.cloud';
 var username = "apikey-v2-2ljquxfv08tvwer4tzk7yqo17r4gst81mj2js2tkwvvi";
@@ -69,7 +64,7 @@ app.post('/insert-document', function (req, res) {
   var id, name, address, phone, age, database_name;
   database_name = req.body.db;
   id = req.body.id,
-  name = req.body.name;
+    name = req.body.name;
   address = req.body.address;
   phone = req.body.phone;
   age = req.body.age;
