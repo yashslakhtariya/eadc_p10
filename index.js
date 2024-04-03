@@ -6,7 +6,7 @@ var PORT = process.env.PORT || 8000;
 
 var url = 'https://apikey-v2-2ljquxfv08tvwer4tzk7yqo17r4gst81mj2js2tkwvvi:1ea37fd951083872588cb276a59465ad@60379ad1-b8cb-4933-bb03-b1bfa6df8a7e-bluemix.cloudantnosqldb.appdomain.cloud';
 var username = "apikey-v2-2ljquxfv08tvwer4tzk7yqo17r4gst81mj2js2tkwvvi";
-var password = "1ea37fd951083872588cb276a59465a";
+var password = "1ea37fd951083872588cb276a59465ad";
 var app = express();
 const bodyParser = require('body-parser');
 //const cors = require('cors');
