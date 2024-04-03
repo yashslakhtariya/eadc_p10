@@ -15,6 +15,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 /////////////
+
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', function (req, res) {
   res.send("Welcome to cloudant database on IBM Cloud");
 });
@@ -184,7 +188,30 @@ app.put('/update-document', function (req, res) {
 
 
 //////////////
+app.post('/html-insert', function (req, res) {
+  var name = req.body.name;
+  var phone = req.body.phone;
+  var email = req.body.email;
+  var city = req.body.city;
+  var country = req.body.country;
+  var pincode = req.body.pincode;
+  var database_name = 'dbten';
 
+  Cloudant({ url: url, username: username, password: password }, function (err, cloudant, pong) {
+    if (err) {
+      return console.log('Failed to initialize Cloudant: ' + err.message);
+    }
+    console.log(pong);
+
+    cloudant.use(database_name).insert({ "name": name, "phone": phone, "email": email, "city": city, "country": country, "pincode": pincode }, (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(data);
+      }
+    });
+  });
+});
 
 
 app.listen(PORT);
